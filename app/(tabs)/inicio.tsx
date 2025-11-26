@@ -1,14 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Image, Modal, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
-
-const router = useRouter();
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function Inicio() {
+  const router = useRouter();
   const [menuVisible, setMenuVisible] = useState(false);
-  const [loginVisible, setLoginVisible] = useState(false);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -20,7 +17,7 @@ export default function Inicio() {
             <Text style={styles.menuText}>☰ Menú</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => setLoginVisible(true)}>
+          <TouchableOpacity onPress={() => router.push('/register')}>
             <Ionicons name="person-circle-outline" size={32} color="#000" />
           </TouchableOpacity>
         </View>
@@ -28,29 +25,37 @@ export default function Inicio() {
         {/* MENÚ DESPLEGABLE */}
         {menuVisible && (
           <View style={styles.dropdown}>
-            <TouchableOpacity style={styles.dropdownItem}>
+            <TouchableOpacity 
+              style={styles.dropdownItem} 
+              onPress={() => {
+                router.push('/conocenos');
+                setMenuVisible(false);
+              }}
+            >
               <Text style={styles.dropdownText}>Conócenos</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.dropdownItem}>
+
+            <TouchableOpacity 
+              style={styles.dropdownItem} 
+              onPress={() => {
+                router.push('/suscripciones');
+                setMenuVisible(false);
+              }}
+            >
               <Text style={styles.dropdownText}>Suscripciones</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.dropdownItem}>
+
+            <TouchableOpacity 
+              style={styles.dropdownItem} 
+              onPress={() => {
+                router.push('/proveedores');
+                setMenuVisible(false);
+              }}
+            >
               <Text style={styles.dropdownText}>Proveedores</Text>
             </TouchableOpacity>
           </View>
         )}
-
-        {/* MODAL LOGIN */}
-        <Modal visible={loginVisible} transparent animationType="slide">
-          <View style={styles.modalBackground}>
-            <View style={styles.modalContainer}>
-              <Text style={styles.modalTitle}>Login / Register</Text>
-              <TouchableOpacity onPress={() => setLoginVisible(false)} style={styles.modalButton}>
-                <Text style={styles.modalButtonText}>Cerrar</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
 
         {/* HEADER / BANNER */}
         <View style={styles.header}>
@@ -94,12 +99,6 @@ const styles = StyleSheet.create({
   dropdown: { backgroundColor: "#000", paddingVertical: 10 },
   dropdownItem: { paddingVertical: 10, paddingHorizontal: 20 },
   dropdownText: { color: "#fff", fontSize: 16 },
-
-  modalBackground: { flex: 1, backgroundColor: "rgba(0,0,0,0.5)", justifyContent: "center", alignItems: "center" },
-  modalContainer: { backgroundColor: "#fff", width: "80%", padding: 20, borderRadius: 15 },
-  modalTitle: { fontSize: 20, fontWeight: "bold", marginBottom: 20 },
-  modalButton: { backgroundColor: "#000", padding: 12, borderRadius: 10, alignItems: "center" },
-  modalButtonText: { color: "#fff", fontWeight: "bold" },
 
   header: { padding: 20, alignItems: "center" },
   headerTitle: { fontSize: 28, fontWeight: "bold", color: "#000" },
