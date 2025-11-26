@@ -1,10 +1,10 @@
-// app/register.tsx
+
 import { useState } from "react";
 import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { CheckBox } from "react-native-elements";
 
-// URL de tu backend - cambia el IP por tu IP local si estás en dispositivo físico
-const API_URL = "http://localhost:5000/api";
+// URL de backend
+const API_URL = "http://192.168.15.50:50000/api";
 
 export default function Register() {
   const [step, setStep] = useState<1 | 2 | 3>(1);
