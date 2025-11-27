@@ -69,7 +69,7 @@ app.post("/api/send-code", async (req, res) => {
       { verificationCode: codigo },
       { upsert: true }
     );
-
+//hola
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: email,
